@@ -29,7 +29,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int counter = 6;
         int countMiss = 0;
-        String temp = "";
+        StringBuilder temp = new StringBuilder();
         while (counter >= 0) {
             if(!Arrays.toString(points).contains("_")){
                 System.out.println("Вы выйграли!!!");
@@ -63,7 +63,7 @@ public class Main {
             String latter = scanner.nextLine();
             int changes = 0;
 
-            ;
+
             for (int i = 0; i < randomWord.length(); i++) {
                 if(arr[i] == latter.charAt(0)) {
                     changes++;
@@ -73,7 +73,7 @@ public class Main {
             }
             if(changes == 0) {
                 countMiss++;
-                temp = temp + "," + latter;
+                temp.append(",").append(latter);
                 System.out.println("Вы не угадали букву!");
                 System.out.println("Слово: " + Arrays.toString(points));
                 System.out.println("Колличество ошибок: " + countMiss);
@@ -83,7 +83,10 @@ public class Main {
                 System.out.println("Вы угадали букву!");
                 System.out.println("Слово: " + Arrays.toString(points));
                 System.out.println("Колличество ошибок: " + countMiss);
-                System.out.println("Неугаданные буквы: " + temp.substring(1));
+                if(!temp.toString().isEmpty()){
+                    System.out.println("Неугаданные буквы: " + temp.substring(1));
+                }
+
 
             }
         }
