@@ -57,7 +57,7 @@ public class Game {
         scanner.close();
     }
 
-    public static void sessionOfTheGame(List<Character> arr, String randomWord, List<Character> points) {
+    private static void sessionOfTheGame(List<Character> arr, String randomWord, List<Character> points) {
         Scanner scanner = new Scanner(System.in);
         int counter = 6;
         int countMiss = 0;
