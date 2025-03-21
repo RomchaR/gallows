@@ -1,4 +1,4 @@
-public class Mistakes {
+public class PicturesForMistakes {
 
     static String start =
                     "                _________\n" +
