@@ -62,7 +62,9 @@ public class Game {
         int counter = 6;
         int countMiss = 0;
         StringBuilder temp = new StringBuilder();
-        List<Character> tempArr = List.of('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я');
+        List<Character> tempArr = List.of('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И',
+                'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',
+                'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я');
         while (counter >= 0) {
             if (!points.contains('_')) {
                 System.out.println("Вы выйграли!!!");
