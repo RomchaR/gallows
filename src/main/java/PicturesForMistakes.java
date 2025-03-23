@@ -1,7 +1,7 @@
 public class PicturesForMistakes {
 
     public static final String start =
-                    "                _________\n" +
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
@@ -14,8 +14,8 @@ public class PicturesForMistakes {
                     "                        |\n" +
                     "           ----------------";
 
-    public static final String firstMis =
-                    "                _________\n" +
+    public static final String firstMistake =
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
@@ -28,8 +28,8 @@ public class PicturesForMistakes {
                     "                        |\n" +
                     "           ----------------";
 
-    public static final String secondMis =
-                    "                _________\n" +
+    public static final String secondMistake =
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
@@ -42,8 +42,8 @@ public class PicturesForMistakes {
                     "                        |\n" +
                     "           ----------------";
 
-    public static final String thirdMis =
-                    "                _________\n" +
+    public static final String thirdMistake =
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
@@ -56,8 +56,8 @@ public class PicturesForMistakes {
                     "                        |\n" +
                     "           ----------------";
 
-    public static final String fourthMis =
-                    "                _________\n" +
+    public static final String fourthMistake =
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
@@ -70,8 +70,8 @@ public class PicturesForMistakes {
                     "                        |\n" +
                     "           ----------------";
 
-    public static final String fifthMis =
-                    "                _________\n" +
+    public static final String fifthMistake =
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
@@ -84,8 +84,8 @@ public class PicturesForMistakes {
                     "                        |\n" +
                     "           ----------------";
 
-    public static final String lastMis =
-                    "                _________\n" +
+    public static final String lastMistake =
+            "                _________\n" +
                     "                |       |\n" +
                     "                |       |\n" +
                     "                |       |\n" +
