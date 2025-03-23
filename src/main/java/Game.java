@@ -3,25 +3,6 @@ import java.util.*;
 public class Game {
 
 
-    private final List<String> nouns = List.of(
-            "яблоко", "машина", "дом", "стол", "дерево", "река", "собака", "кот", "птица", "небо",
-            "жизнь", "планета", "книга", "солнце", "звезда", "книга", "облако", "туча", "друг", "папа",
-            "мама", "учитель", "работа", "песок", "лес", "горе", "свет", "хлеб", "город", "страна",
-            "день", "ночь", "время", "счастье", "любовь", "работа", "улыбка", "смеяться", "покой", "воля",
-            "сила", "смешарики", "друзья", "волк", "скала", "камень", "обувь", "пальто", "шляпа",
-            "молоко", "птица", "рыба", "цветок", "трава", "лес", "картина", "штат", "транспорт", "животное",
-            "акула", "живопись", "компьютер", "интернет", "автомобиль", "телефон", "новости", "картинка", "письмо",
-            "глобус", "зеркало", "письмо", "снаряд", "ракета", "стрела", "ткань", "песня", "история", "сказка",
-            "фильм", "магазин", "дерево", "страшилка", "шарик", "пуля", "губка", "телевизор", "сериал",
-            "пункт", "свитер", "подушка", "зонт", "гитара", "тетрис", "костюм", "платок", "медаль", "отель",
-            "портфель", "сумка", "работа", "результат", "вопрос", "подарок", "штучка", "мозаика", "цветок");
-
-    private final Random rand = new Random();
-
-    private String getRandomNoun() {
-        return nouns.get(rand.nextInt(nouns.size()));
-    }
-
     public void start() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Желаете начать новую игру?(да/нет): ");
@@ -36,7 +17,7 @@ public class Game {
         }
 
         while (input.equalsIgnoreCase("да")) {
-            String randomWord = getRandomNoun();
+            String randomWord = RandomNoun.getRandomNoun();
             List<Character> randomArr = new ArrayList<>();
             for (char c : randomWord.toCharArray()) {
                 randomArr.add(c);
@@ -112,13 +93,13 @@ public class Game {
                 temp.append(",").append(latter);
                 System.out.println("Вы не угадали букву!");
                 System.out.println("Слово: " + points);
-                System.out.println("Колличество ошибок: " + countMiss);
+                System.out.println("Количество ошибок: " + countMiss);
                 System.out.println("Неугаданные буквы: " + temp.substring(1));
                 counter--;
             } else {
                 System.out.println("Вы угадали букву!");
                 System.out.println("Слово: " + points);
-                System.out.println("Колличество ошибок: " + countMiss);
+                System.out.println("Количество ошибок: " + countMiss);
                 if (!temp.toString().isEmpty()) {
                     System.out.println("Неугаданные буквы: " + temp.substring(1));
                 }
@@ -128,6 +109,4 @@ public class Game {
         }
         scanner.close();
     }
-
-
 }
