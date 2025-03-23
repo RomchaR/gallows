@@ -4,45 +4,41 @@ import java.util.Scanner;
 public class NewGame {
 
 
-    public static void startNewSession(List<Character> arr, String randomWord, List<Character> points) {
-        Scanner scanner = new Scanner(System.in);
-        int counter = 6;
+    public static void startNewSession(List<Character> arr, String randomWord, List<Character> points, Scanner scanner) {
+        int counterOfMistakes = 6;
         int countMiss = 0;
         StringBuilder temp = new StringBuilder();
-        List<Character> tempArr = List.of('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И',
-                'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',
-                'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я');
-        while (counter >= 0) {
+        while (counterOfMistakes >= 0) {
             if (!points.contains('_')) {
                 System.out.println("Вы выйграли!!!");
-                System.out.println("Слово: " + randomWord);
+                System.out.println(SetOfConstants.word + randomWord);
                 return;
             }
-            if (counter == 6) {
+            if (counterOfMistakes == 6) {
                 System.out.println(PicturesForMistakes.start);
-            } else if (counter == 5) {
+            } else if (counterOfMistakes == 5) {
                 System.out.println(PicturesForMistakes.firstMistake);
-            } else if (counter == 4) {
+            } else if (counterOfMistakes == 4) {
                 System.out.println(PicturesForMistakes.secondMistake);
-            } else if (counter == 3) {
+            } else if (counterOfMistakes == 3) {
                 System.out.println(PicturesForMistakes.thirdMistake);
-            } else if (counter == 2) {
+            } else if (counterOfMistakes == 2) {
                 System.out.println(PicturesForMistakes.fourthMistake);
-            } else if (counter == 1) {
+            } else if (counterOfMistakes == 1) {
                 System.out.println(PicturesForMistakes.fifthMistake);
             } else {
                 System.out.println("Вы проиграли!");
-                System.out.println("Слово: " + randomWord);
+                System.out.println(SetOfConstants.word + randomWord);
                 System.out.println(PicturesForMistakes.lastMistake);
                 return;
             }
 
-            System.out.print("Введите букву: ");
+            System.out.print(SetOfConstants.word);
             String latter = scanner.nextLine();
             int changes = 0;
 
-            while (latter.length() > 1 || !tempArr.contains(latter.toUpperCase().charAt(0))) {
-                System.out.println("Некорректный ввод! Введите букву: ");
+            while (latter.length() > 1 || !SetOfConstants.alphabet.contains(latter.toUpperCase().charAt(0))) {
+                System.out.println(SetOfConstants.incorrectInput);
                 latter = scanner.nextLine();
             }
 
@@ -58,19 +54,18 @@ public class NewGame {
                 countMiss++;
                 temp.append(",").append(latter);
                 System.out.println("Вы не угадали букву!");
-                System.out.println("Слово: " + points);
-                System.out.println("Количество ошибок: " + countMiss);
-                System.out.println("Неугаданные буквы: " + temp.substring(1));
-                counter--;
+                System.out.println(SetOfConstants.word + points);
+                System.out.println(SetOfConstants.numberOfMistakes + countMiss);
+                System.out.println(SetOfConstants.noGuessedLetters + temp.substring(1));
+                counterOfMistakes--;
             } else {
                 System.out.println("Вы угадали букву!");
-                System.out.println("Слово: " + points);
-                System.out.println("Количество ошибок: " + countMiss);
+                System.out.println(SetOfConstants.word + points);
+                System.out.println(SetOfConstants.numberOfMistakes + countMiss);
                 if (!temp.toString().isEmpty()) {
-                    System.out.println("Неугаданные буквы: " + temp.substring(1));
+                    System.out.println(SetOfConstants.noGuessedLetters + temp.substring(1));
                 }
             }
         }
-        scanner.close();
     }
 }

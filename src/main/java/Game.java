@@ -26,7 +26,7 @@ public class Game {
             for (int i = 0; i < randomArr.size(); i++) {
                 pointsOfRandomWord.add('_');
             }
-            NewGame.startNewSession(randomArr,randomWord,pointsOfRandomWord);
+            NewGame.startNewSession(randomArr,randomWord,pointsOfRandomWord,scanner);
             System.out.print("Сыграть еще?(да/нет): ");
             input = scanner.nextLine();
 
