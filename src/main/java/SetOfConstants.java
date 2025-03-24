@@ -8,6 +8,4 @@ public class SetOfConstants {
     public static final String incorrectInput = "Некорректный ввод! Введите букву: ";
     public static final String numberOfMistakes = "Количество ошибок: ";
     public static final String noGuessedLetters = "Количество ошибок: ";
-
-
 }

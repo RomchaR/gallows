@@ -3,33 +3,11 @@ import java.util.Scanner;
 
 public class NewGame {
 
-
-    public static void startNewSession(List<Character> arr, String randomWord, List<Character> points, Scanner scanner) {
+    public static void startNewGame(List<Character> arr, String randomWord, List<Character> emptyWord, Scanner scanner) {
         int counterOfMistakes = 6;
-        int countMiss = 0;
         StringBuilder temp = new StringBuilder();
         while (counterOfMistakes >= 0) {
-            if (!points.contains('_')) {
-                System.out.println("Вы выйграли!!!");
-                System.out.println(SetOfConstants.word + randomWord);
-                return;
-            }
-            if (counterOfMistakes == 6) {
-                System.out.println(PicturesForMistakes.start);
-            } else if (counterOfMistakes == 5) {
-                System.out.println(PicturesForMistakes.firstMistake);
-            } else if (counterOfMistakes == 4) {
-                System.out.println(PicturesForMistakes.secondMistake);
-            } else if (counterOfMistakes == 3) {
-                System.out.println(PicturesForMistakes.thirdMistake);
-            } else if (counterOfMistakes == 2) {
-                System.out.println(PicturesForMistakes.fourthMistake);
-            } else if (counterOfMistakes == 1) {
-                System.out.println(PicturesForMistakes.fifthMistake);
-            } else {
-                System.out.println("Вы проиграли!");
-                System.out.println(SetOfConstants.word + randomWord);
-                System.out.println(PicturesForMistakes.lastMistake);
+            if (checkIsOver(emptyWord, randomWord, counterOfMistakes)) {
                 return;
             }
 
@@ -45,27 +23,61 @@ public class NewGame {
             for (int i = 0; i < randomWord.length(); i++) {
                 if (arr.get(i) == latter.charAt(0)) {
                     changes++;
-                    points.set(i, arr.get(i));
+                    emptyWord.set(i, arr.get(i));
 
                 }
             }
 
             if (changes == 0) {
-                countMiss++;
+                counterOfMistakes--;
                 temp.append(",").append(latter);
                 System.out.println("Вы не угадали букву!");
-                System.out.println(SetOfConstants.word + points);
-                System.out.println(SetOfConstants.numberOfMistakes + countMiss);
+                System.out.println(SetOfConstants.word + emptyWord);
+                System.out.println(SetOfConstants.numberOfMistakes + Math.abs(counterOfMistakes - 6));
                 System.out.println(SetOfConstants.noGuessedLetters + temp.substring(1));
-                counterOfMistakes--;
+
             } else {
                 System.out.println("Вы угадали букву!");
-                System.out.println(SetOfConstants.word + points);
-                System.out.println(SetOfConstants.numberOfMistakes + countMiss);
+                System.out.println(SetOfConstants.word + emptyWord);
+                System.out.println(SetOfConstants.numberOfMistakes + Math.abs(counterOfMistakes - 6));
                 if (!temp.toString().isEmpty()) {
                     System.out.println(SetOfConstants.noGuessedLetters + temp.substring(1));
                 }
             }
+        }
+    }
+
+    private static String getPictureForMistakes(int mistakes) {
+        if (mistakes == 6) {
+            return PicturesForMistakes.start;
+        } else if (mistakes == 5) {
+            return PicturesForMistakes.firstMistake;
+        } else if (mistakes == 4) {
+            return PicturesForMistakes.secondMistake;
+        } else if (mistakes == 3) {
+            return PicturesForMistakes.thirdMistake;
+        } else if (mistakes == 2) {
+            return PicturesForMistakes.fourthMistake;
+        } else if (mistakes == 1) {
+            return PicturesForMistakes.fifthMistake;
+        }
+        return null;
+    }
+
+    private static boolean checkIsOver(List<Character> emptyWord, String randomWord, int counterOfMistakes) {
+        if (!emptyWord.contains('_')) {
+            System.out.println("Вы выйграли!!!");
+            System.out.println(SetOfConstants.word + randomWord);
+            return true;
+        }
+        if (getPictureForMistakes(counterOfMistakes) != null) {
+            System.out.println(getPictureForMistakes(counterOfMistakes));
+            return false;
+        } else {
+            System.out.println("Вы проиграли!");
+            System.out.println(SetOfConstants.word + randomWord);
+            System.out.println(PicturesForMistakes.lastMistake);
+            return true;
         }
     }
 }
