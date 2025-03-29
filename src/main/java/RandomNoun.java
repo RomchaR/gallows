@@ -18,7 +18,7 @@ public class RandomNoun {
 
     private static final Random random = new Random();
 
-    static String getRandomNoun() {
+    public String getRandomNoun() {
         return nouns.get(random.nextInt(nouns.size()));
     }
 }

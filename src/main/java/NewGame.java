@@ -1,83 +1,94 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class NewGame {
+    private final Scanner scanner;
+    private final List<String> wordAsChar;
+    private final String hiddenWord;
+    private final StringBuilder temp = new StringBuilder();
 
-    public static void startNewGame(List<Character> arr, String randomWord, List<Character> emptyWord, Scanner scanner) {
+    public NewGame(Scanner scanner,
+                   String hiddenWord) {
+        this.scanner = scanner;
+        this.hiddenWord = hiddenWord;
+        this.wordAsChar = List.of(hiddenWord.split(""));
+    }
+
+    public void startNewGame() {
+        List<String> emptyWord = getEmptyWord();
         int counterOfMistakes = 6;
-        StringBuilder temp = new StringBuilder();
+
         while (counterOfMistakes >= 0) {
-            if (checkIsOver(emptyWord, randomWord, counterOfMistakes)) {
+            if (checkIsOver(emptyWord, counterOfMistakes)) {
                 return;
             }
 
-            System.out.print(SetOfConstants.word);
+            System.out.print(SetOfConstants.letter);
             String latter = scanner.nextLine();
             int changes = 0;
 
-            while (latter.length() > 1 || !SetOfConstants.alphabet.contains(latter.toUpperCase().charAt(0))) {
+            while (latter.length() > 1 || !SetOfConstants.containsInAlphabet(latter)) {
                 System.out.println(SetOfConstants.incorrectInput);
                 latter = scanner.nextLine();
             }
 
-            for (int i = 0; i < randomWord.length(); i++) {
-                if (arr.get(i) == latter.charAt(0)) {
-                    changes++;
-                    emptyWord.set(i, arr.get(i));
-
-                }
-            }
-
-            if (changes == 0) {
-                counterOfMistakes--;
-                temp.append(",").append(latter);
-                System.out.println("Вы не угадали букву!");
-                System.out.println(SetOfConstants.word + emptyWord);
-                System.out.println(SetOfConstants.numberOfMistakes + Math.abs(counterOfMistakes - 6));
-                System.out.println(SetOfConstants.noGuessedLetters + temp.substring(1));
-
-            } else {
-                System.out.println("Вы угадали букву!");
-                System.out.println(SetOfConstants.word + emptyWord);
-                System.out.println(SetOfConstants.numberOfMistakes + Math.abs(counterOfMistakes - 6));
-                if (!temp.toString().isEmpty()) {
-                    System.out.println(SetOfConstants.noGuessedLetters + temp.substring(1));
-                }
-            }
+            changes = getChangesForMistakes(latter, changes, emptyWord);
+            counterOfMistakes = checkHiddenLatter(changes, counterOfMistakes, latter, emptyWord);
         }
     }
 
-    private static String getPictureForMistakes(int mistakes) {
-        if (mistakes == 6) {
-            return PicturesForMistakes.start;
-        } else if (mistakes == 5) {
-            return PicturesForMistakes.firstMistake;
-        } else if (mistakes == 4) {
-            return PicturesForMistakes.secondMistake;
-        } else if (mistakes == 3) {
-            return PicturesForMistakes.thirdMistake;
-        } else if (mistakes == 2) {
-            return PicturesForMistakes.fourthMistake;
-        } else if (mistakes == 1) {
-            return PicturesForMistakes.fifthMistake;
-        }
-        return null;
-    }
-
-    private static boolean checkIsOver(List<Character> emptyWord, String randomWord, int counterOfMistakes) {
-        if (!emptyWord.contains('_')) {
+    private boolean checkIsOver(List<String> emptyWord, int counterOfMistakes) {
+        if (!emptyWord.contains("_")) {
             System.out.println("Вы выйграли!!!");
-            System.out.println(SetOfConstants.word + randomWord);
+            System.out.println(SetOfConstants.word + hiddenWord);
             return true;
         }
-        if (getPictureForMistakes(counterOfMistakes) != null) {
-            System.out.println(getPictureForMistakes(counterOfMistakes));
+        if (counterOfMistakes <= 6 && counterOfMistakes > 0) {
+            System.out.println(PicturesForMistakes.get(Math.abs(counterOfMistakes - 6)));
             return false;
         } else {
             System.out.println("Вы проиграли!");
-            System.out.println(SetOfConstants.word + randomWord);
-            System.out.println(PicturesForMistakes.lastMistake);
+            System.out.println(SetOfConstants.word + hiddenWord);
+            System.out.println(PicturesForMistakes.LAST);
             return true;
         }
+    }
+
+    private List<String> getEmptyWord() {
+        List<String> emptyWord = new ArrayList<>();
+        for (int i = 0; i < wordAsChar.size(); i++) {
+            emptyWord.add("_");
+        }
+        return emptyWord;
+    }
+
+    private int checkHiddenLatter(int changes, int counterOfMistakes, String latter, List<String> emptyWord) {
+        if (changes == 0) {
+            counterOfMistakes--;
+            temp.append(",").append(latter);
+            System.out.println("Вы не угадали букву!");
+            System.out.println(SetOfConstants.word + emptyWord);
+            System.out.println(SetOfConstants.numberOfMistakes + Math.abs(counterOfMistakes - 6));
+            System.out.println(SetOfConstants.unguessedLetters + temp.substring(1));
+        } else {
+            System.out.println("Вы угадали букву!");
+            System.out.println(SetOfConstants.word + emptyWord);
+            System.out.println(SetOfConstants.numberOfMistakes + Math.abs(counterOfMistakes - 6));
+            if (!temp.toString().isEmpty()) {
+                System.out.println(SetOfConstants.unguessedLetters + temp.substring(1));
+            }
+        }
+        return counterOfMistakes;
+    }
+
+    private int getChangesForMistakes(String latter, int changes, List<String> emptyWord) {
+        for (int i = 0; i < wordAsChar.size(); i++) {
+            if (wordAsChar.get(i).equals(latter.charAt(0) + "")) {
+                changes++;
+                emptyWord.set(i, wordAsChar.get(i));
+            }
+        }
+        return changes;
     }
 }
